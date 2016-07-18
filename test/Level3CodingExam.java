@@ -67,5 +67,62 @@ public class Level3CodingExam {
 	}
 }
 
+class VoteProcessor{
+	public String calculateElectionWinner(ArrayList<String> votes){
+		HashMap<String, Integer> candPlusVotes = new HashMap<String, Integer>();
+		ArrayList<String> candidates = new ArrayList<String>();
+		ArrayList<String> lowerCaseVotes = new ArrayList<String>();
+		for(String s: votes){
+			s = s.toLowerCase();
+			if(!candidates.contains(s)){
+				candidates.add(s);
+			}
+		}
+		for(String s: votes){
+			s = s.toLowerCase();
+			lowerCaseVotes.add(s);
+		}
+		for(String s: candidates){
+			int counter = 0;
+			for(String str: lowerCaseVotes){
+				if(str.equals(s)){
+					counter++;
+				}
+			}
+			candPlusVotes.put(s, counter);
+		}
+		
+		int firstCandidate = candPlusVotes.get(candidates.get(0));
+		int secondCandidate = candPlusVotes.get(candidates.get(1));
+		
+		String winner = "";
+		
+		if(firstCandidate > secondCandidate){
+			winner = candidates.get(0);
+		}
+		else if(firstCandidate < secondCandidate){
+			winner = candidates.get(1);
+		}
+		else if(firstCandidate == secondCandidate){
+			winner = "TIE";
+		}
+		
+		return winner;
+	}
+}
 
-
+class HashMapCalculator{
+	public int commonKeyValuePairs(HashMap<String, String> hash1, HashMap<String, String> hash2){
+		int counter = 0;
+		for(String s: hash1.keySet()){
+			for(String str: hash2.keySet()){
+				if(s.equals(str)){
+					if(hash1.get(s) == hash2.get(str)){
+						counter++;
+					}
+				}
+			}
+		}
+		return counter;
+	}
+}
